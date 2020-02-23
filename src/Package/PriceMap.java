@@ -27,12 +27,20 @@ public class PriceMap {
     }
 
     public Price purchase(Integer code, Integer number) {
-        Integer newKopecks = products.get(code).price.kopecks * number;
-        Integer newRoubles = products.get(code).price.roubles * number;
+        int newKopecks = products.get(code).price.kopecks * number;
+        int newRoubles = products.get(code).price.roubles * number;
         if (newKopecks > 100) {
             newRoubles += newKopecks % 100;
             newKopecks /= 100;
         }
         return new Price(newRoubles, newKopecks);
+    }
+
+    public String getName(Integer code) {
+        return products.get(code).name;
+    }
+
+    public Price getPrice(Integer code) {
+        return products.get(code).price;
     }
 }
