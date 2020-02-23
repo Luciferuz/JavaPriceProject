@@ -17,7 +17,6 @@ public class Product {      //класс продукт
             this.roubles = roubles;
             this.kopecks = kopecks;
         }
-
     }
 
 }

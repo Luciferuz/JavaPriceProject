@@ -11,7 +11,7 @@ public class PriceMapTest {
 
     @Test
     public void addProduct() {
-        PriceMap priceMap0 = new HashMap<Integer, Product>();
+        //PriceMap priceMap0 = new HashMap<Integer, Product>();
 
 
         PriceMap priceMap1 = new PriceMap(Map.of(12, new Product("Мясо", new Price(3,4))));
@@ -31,7 +31,7 @@ public class PriceMapTest {
                                                  34, new Product("Молоко", new Price(67,99))));
 
         priceMap2.deleteProduct(34);
-        assertEquals(priceMap2, priceMap1);
+        assertSame(priceMap2, priceMap1);
     }
 
     @Test //passed
