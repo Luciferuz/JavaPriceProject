@@ -30,8 +30,8 @@ public class PriceMap {
         int newKopecks = products.get(code).price.kopecks * number;
         int newRoubles = products.get(code).price.roubles * number;
         if (newKopecks > 100) {
-            newRoubles += newKopecks % 100;
-            newKopecks /= 100;
+            newRoubles += newKopecks / 100;
+            newKopecks %= 100;
         }
         return new Price(newRoubles, newKopecks);
     }
@@ -40,7 +40,7 @@ public class PriceMap {
         return products.get(code).name;
     }
 
-    public Price getPrice(Integer code) {
-        return products.get(code).price;
+    public Integer getPrice(Price price) { //выдает в копейках
+        return price.roubles * 100 + price.kopecks;
     }
 }
