@@ -1,10 +1,11 @@
 package Package;
+import java.util.HashMap;
 import java.util.Map;
 import Package.Product.Price;
 
 public class PriceMap {
 
-    public Map<Integer, Product> products;
+    private Map<Integer, Product> products;
 
     public PriceMap(Map<Integer, Product> products) {
         this.products = products;
@@ -42,5 +43,9 @@ public class PriceMap {
 
     public Integer getPrice(Price price) { //выдает в копейках
         return price.roubles * 100 + price.kopecks;
+    }
+
+    public Product getProduct(Integer code) {
+        return products.get(code);
     }
 }

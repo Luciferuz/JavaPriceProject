@@ -7,21 +7,16 @@ import java.util.Map;
 import Package.Product.Price;
 import static org.junit.Assert.*;
 
+
 public class PriceMapTest {
 
     @Test
     public void addProduct() {
-        //PriceMap priceMap0 = new HashMap<Integer, Product>();
-
-
         PriceMap priceMap1 = new PriceMap(Map.of(12, new Product("Мясо", new Price(3,4))));
-        PriceMap priceMap2 = new PriceMap(Map.of(12, new Product("Мясо", new Price(3,4)),
-                                                 34, new Product("Молоко", new Price(67,99))));
-
         Product add1 = new Product("Молоко", new Product.Price(67,99));
 
         priceMap1.addProduct(add1, 34);
-        assertEquals(priceMap1, priceMap2);
+        assertEquals(add1, priceMap1.getProduct(34));
     }
 
     @Test
@@ -31,7 +26,7 @@ public class PriceMapTest {
                                                  34, new Product("Молоко", new Price(67,99))));
 
         priceMap2.deleteProduct(34);
-        assertSame(priceMap2, priceMap1);
+        assertEquals(priceMap2, priceMap1);
     }
 
     @Test //passed
