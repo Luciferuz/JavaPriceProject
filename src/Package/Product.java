@@ -1,7 +1,7 @@
 package Package;
 
-public class Product {      //класс продукт
-    String name;    //название
+public class Product {
+    String name;
     Price price;
 
     public Product(String name, Price price) {

@@ -1,5 +1,4 @@
 package Package;
-import java.util.HashMap;
 import java.util.Map;
 import Package.Product.Price;
 
@@ -48,4 +47,5 @@ public class PriceMap {
     public Product getProduct(Integer code) {
         return products.get(code);
     }
+
 }
