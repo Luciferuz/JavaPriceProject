@@ -1,6 +1,6 @@
 package Package;
+import java.util.HashMap;
 import java.util.Map;
-import Package.Product.Price;
 
 public class PriceMap {
 
@@ -10,12 +10,16 @@ public class PriceMap {
         this.products = products;
     }
 
+    public PriceMap() {
+        products = new HashMap<Integer, Product>();
+    }
+
     public void addProduct(Product product, Integer code) { //добавили продукт и его код
-       products.put(code, product);
+        if (!products.containsKey(code)) products.put(code, product);
     }
 
     public void deleteProduct(Integer code) { //удалили продукт, зная его код
-        products.remove(code);
+        if (products.containsKey(code)) products.remove(code);
     }
 
     public void changeName(Integer code, String name) { //изменение имени по коду
@@ -26,7 +30,7 @@ public class PriceMap {
         products.get(code).price = price;
     }
 
-    public Price purchase(Integer code, Integer number) {
+    public Price purchase(Integer code, int number) {
         int newKopecks = products.get(code).price.kopecks * number;
         int newRoubles = products.get(code).price.roubles * number;
         if (newKopecks > 100) {
@@ -38,10 +42,6 @@ public class PriceMap {
 
     public String getName(Integer code) {
         return products.get(code).name;
-    }
-
-    public Integer getPrice(Price price) { //выдает в копейках
-        return price.roubles * 100 + price.kopecks;
     }
 
     public Product getProduct(Integer code) {

@@ -1,10 +1,10 @@
 package tests;
 import org.junit.Test;
-import Package.Product;
-import Package.PriceMap;
 import java.util.HashMap;
 import java.util.Map;
-import Package.Product.Price;
+import Package.Price;
+import Package.Product;
+import Package.PriceMap;
 import static org.junit.Assert.*;
 
 
@@ -13,42 +13,36 @@ public class PriceMapTest {
     @Test //passed
     public void addProduct() {
         Map<Integer, Product> products = new HashMap<>();
-        Product add1 = new Product("Молоко", new Product.Price(63,99));
-        Product add2 = new Product("Мясо", new Price(3,4));
-        Product add3 = new Product("Минеральная вода", new Price(23,44));
-        Product add4 = new Product("Сметана", new Price(55,30));
-        products.put(12, add1);
-        products.put(21, add2);
+        products.put(12, new Product("Молоко", new Price(63,99)));
+        products.put(21, new Product("Мясо", new Price(3,4)));
 
         PriceMap priceMap = new PriceMap(products);
-        priceMap.addProduct(add3, 43);
-        priceMap.addProduct(add4, 52);
+        priceMap.addProduct(new Product("Минеральная вода", new Price(23,44)), 43);
+        priceMap.addProduct(new Product("Сметана", new Price(55,30)), 52);
 
-        assertEquals(add1, priceMap.getProduct(12));
-        assertEquals(add2, priceMap.getProduct(21));
-        assertEquals(add3, priceMap.getProduct(43));
-        assertEquals(add4, priceMap.getProduct(52));
+        assertEquals(new Product("Молоко", new Price(63,99)), priceMap.getProduct(12));
+        assertEquals(new Product("Мясо", new Price(3,4)), priceMap.getProduct(21));
+        assertEquals(new Product("Минеральная вода", new Price(23,44)), priceMap.getProduct(43));
+        assertEquals(new Product("Сметана", new Price(55,30)), priceMap.getProduct(52));
     }
 
     @Test //passed
     public void deleteProduct() {
         Map<Integer, Product> products = new HashMap<>();
-        Product add1 = new Product("Молоко", new Product.Price(63,99));
-        Product add2 = new Product("Мясо", new Price(3,4));
-        Product add3 = new Product("Минеральная вода", new Price(23,44));
-        Product add4 = new Product("Сметана", new Price(55,30));
-        products.put(12, add1);
-        products.put(21, add2);
-        products.put(43, add3);
-        products.put(52, add4);
+
+        products.put(12, new Product("Молоко", new Price(63,99)));
+        products.put(21, new Product("Мясо", new Price(3,4)));
+        products.put(43, new Product("Минеральная вода", new Price(23,44)));
+        products.put(52, new Product("Сметана", new Price(55,30)));
 
         PriceMap priceMap = new PriceMap(products);
+
         priceMap.deleteProduct(43);
         priceMap.deleteProduct(21);
-        assertEquals(add1, priceMap.getProduct(12));
+        assertEquals(new Product("Молоко", new Price(63,99)), priceMap.getProduct(12));
         assertNull(priceMap.getProduct(21));
         assertNull(priceMap.getProduct(43));
-        assertEquals(add4, priceMap.getProduct(52));
+        assertEquals(new Product("Сметана", new Price(55,30)), priceMap.getProduct(52));
     }
 
     @Test //passed
@@ -81,15 +75,10 @@ public class PriceMapTest {
                 42, new Product("Сметана", new Price(55,30))));
 
         priceMap.changePrice(90, new Price(24,56));
-        Integer sum1 = priceMap.getPrice(priceMap.purchase(90, 1));
-        Integer answer1 = 2456;
-
         priceMap.changePrice(42, new Price(123,59));
-        Integer sum2 = priceMap.getPrice(priceMap.purchase(42, 1));
-        Integer answer2 = 12359;
 
-        assertEquals(sum1, answer1);
-        assertEquals(sum2, answer2);
+        assertEquals(2456, priceMap.getProduct(90).price.getPriceKopecks());
+        assertEquals(12359, priceMap.getProduct(42).price.getPriceKopecks());
     }
 
     @Test //passed
@@ -101,18 +90,8 @@ public class PriceMapTest {
                 90, new Product("Мороженое", new Price(99,90)),
                 42, new Product("Сметана", new Price(55,30))));
 
-        //выдает в копейках
-        Integer sum1 = priceMap.getPrice(priceMap.purchase(21, 1));
-        Integer mySum1 = 2344;
-
-        Integer sum2 = priceMap.getPrice(priceMap.purchase(90, 8));
-        Integer mySum2 = 79920;
-
-        Integer sum3 = priceMap.getPrice(priceMap.purchase(34, 9));
-        Integer mySum3 = 40707;
-
-        assertEquals(sum1, mySum1);
-        assertEquals(sum2, mySum2);
-        assertEquals(sum3, mySum3);
+        assertEquals(2344, priceMap.purchase(21,1).getPriceKopecks());
+        assertEquals(79920, priceMap.purchase(90,8).getPriceKopecks());
+        assertEquals(40707, priceMap.purchase(34,9).getPriceKopecks());
     }
 }
