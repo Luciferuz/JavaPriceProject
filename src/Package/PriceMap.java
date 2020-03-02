@@ -7,6 +7,7 @@ public class PriceMap {
     private Map<Integer, Product> products;
 
     public PriceMap(Map<Integer, Product> products) {
+        //this.products.putAll(products);
         this.products = products;
     }
 
