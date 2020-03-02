@@ -77,8 +77,8 @@ public class PriceMapTest {
         priceMap.changePrice(90, new Price(24,56));
         priceMap.changePrice(42, new Price(123,59));
 
-        assertEquals(2456, priceMap.getProduct(90).price.getPriceKopecks());
-        assertEquals(12359, priceMap.getProduct(42).price.getPriceKopecks());
+        assertEquals(2456, priceMap.getProduct(90).getPrice().getPriceKopecks());
+        assertEquals(12359, priceMap.getProduct(42).getPrice().getPriceKopecks());
     }
 
     @Test //passed

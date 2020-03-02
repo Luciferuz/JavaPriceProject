@@ -1,8 +1,9 @@
 package Package;
+import java.util.Objects;
 
 public class Price {
-    int roubles;
-    int kopecks;
+    private int roubles;
+    private int kopecks;
 
     public Price(int roubles, int kopecks) {
         this.roubles = roubles;
@@ -18,13 +19,9 @@ public class Price {
         return roubles * 100 + kopecks;
     }
 
-    public void getPrice() {
-        new Price(roubles, kopecks);
-    }
-
     @Override
     public int hashCode() {
-        return Integer.valueOf(roubles).hashCode() + Integer.valueOf(kopecks).hashCode();
+        return Objects.hash(roubles, kopecks);
     }
 
     @Override
@@ -33,8 +30,7 @@ public class Price {
         if (object == null) return false;
         if (getClass() != object.getClass()) return false;
         Price price = (Price) object;
-
-        return Integer.valueOf(roubles).equals(price.roubles) && Integer.valueOf(kopecks).equals(price.kopecks);
+        return roubles == price.roubles && kopecks == price.kopecks;
     }
 
 }

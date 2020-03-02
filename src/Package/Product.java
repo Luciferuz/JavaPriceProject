@@ -1,17 +1,34 @@
 package Package;
+import java.util.Objects;
 
 public class Product {
-    String name;
-    public Price price;
+    private String name;
+    private Price price;
 
     public Product(String name, Price price) {
         this.price = price;
         this.name = name;
     }
 
+    void setName(String name) {
+        this.name = name;
+    }
+
+    String getName() {
+        return name;
+    }
+
+    public Price getPrice() {
+        return price;
+    }
+
+    void setPrice(Price price) {
+        this.price = price;
+    }
+
     @Override
     public int hashCode() {
-        return price.hashCode() + name.hashCode();
+        return Objects.hash(name, price);
     }
 
     @Override

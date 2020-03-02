@@ -7,8 +7,7 @@ public class PriceMap {
     private Map<Integer, Product> products;
 
     public PriceMap(Map<Integer, Product> products) {
-        //this.products.putAll(products);
-        this.products = products;
+        this.products = new HashMap<Integer, Product>(products);
     }
 
     public PriceMap() {
@@ -20,29 +19,25 @@ public class PriceMap {
     }
 
     public void deleteProduct(Integer code) { //удалили продукт, зная его код
-        if (products.containsKey(code)) products.remove(code);
+        if (products.remove(code) != null) {
+            products.remove(code);
+        } else throw new IllegalArgumentException();
     }
 
     public void changeName(Integer code, String name) { //изменение имени по коду
-        products.get(code).name = name;
+        products.get(code).setName(name);
     }
 
     public void changePrice(Integer code, Price price) { //изменение цены по коду
-        products.get(code).price = price;
+        products.get(code).setPrice(price);
     }
 
     public Price purchase(Integer code, int number) {
-        int newKopecks = products.get(code).price.kopecks * number;
-        int newRoubles = products.get(code).price.roubles * number;
-        if (newKopecks > 100) {
-            newRoubles += newKopecks / 100;
-            newKopecks %= 100;
-        }
-        return new Price(newRoubles, newKopecks);
+        return new Price(products.get(code).getPrice().getPriceKopecks() * number);
     }
 
     public String getName(Integer code) {
-        return products.get(code).name;
+        return products.get(code).getName();
     }
 
     public Product getProduct(Integer code) {
