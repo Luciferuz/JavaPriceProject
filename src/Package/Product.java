@@ -14,7 +14,7 @@ public class Product {
         this.name = name;
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 

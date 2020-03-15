@@ -19,6 +19,10 @@ public class Price {
         return roubles * 100 + kopecks;
     }
 
+    public Price getPrice() {
+        return new Price(roubles, kopecks);
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(roubles, kopecks);
