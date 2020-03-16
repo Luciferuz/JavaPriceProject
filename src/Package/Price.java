@@ -19,8 +19,12 @@ public class Price {
         return roubles * 100 + kopecks;
     }
 
-    public Price getPrice() {
-        return new Price(roubles, kopecks);
+    public int getKopecks() {
+        return this.kopecks;
+    }
+
+    public int getRoubles() {
+        return this.roubles;
     }
 
     @Override

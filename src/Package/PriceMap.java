@@ -15,12 +15,11 @@ public class PriceMap {
     }
 
     public void addProduct(Product product, Integer code) { //добавили продукт и его код
-        if (products.containsKey(code)) throw new IllegalArgumentException();
-        else products.put(code, product);
+        if (products.putIfAbsent(code, product) != null) throw new IllegalArgumentException();
     }
 
-    public void deleteProduct(Integer code) { //удалили продукт, зная его код
-        products.remove(code);
+    public boolean deleteProduct(Integer code) { //удалили продукт, зная его код
+        return products.remove(code) != null;
     }
 
     public void changeName(Integer code, String name) { //изменение имени по коду
