@@ -15,7 +15,7 @@ public class PriceMap {
     }
 
     public void addProduct(Product product, Integer code) { //добавили продукт и его код
-        if (products.putIfAbsent(code, product) != null) throw new IllegalArgumentException();
+        if (products.putIfAbsent(code, product) != null) throw new IllegalArgumentException("Продукт с таким кодом уже существует");
     }
 
     public boolean deleteProduct(Integer code) { //удалили продукт, зная его код
@@ -23,10 +23,12 @@ public class PriceMap {
     }
 
     public void changeName(Integer code, String name) { //изменение имени по коду
+        if (!products.containsKey(code)) throw new IllegalArgumentException("Продукт с таким кодом отсутствует");
         products.get(code).setName(name);
     }
 
     public void changePrice(Integer code, Price price) { //изменение цены по коду
+        if (!products.containsKey(code)) throw new IllegalArgumentException("Продукт с таким кодом отсутствует");
         products.get(code).setPrice(price);
     }
 
@@ -35,6 +37,7 @@ public class PriceMap {
     }
 
     public String getName(Integer code) {
+        if (!products.containsKey(code)) throw new IllegalArgumentException("Продукт с таким кодом отсутствует");
         return products.get(code).getName();
     }
 
