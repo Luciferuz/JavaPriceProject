@@ -33,6 +33,7 @@ public class PriceMap {
     }
 
     public Price purchase(Integer code, int number) {
+        if (!products.containsKey(code)) throw new IllegalArgumentException("Продукт с таким кодом отсутствует");
         return new Price(products.get(code).getPrice().getPriceKopecks() * number);
     }
 
