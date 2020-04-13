@@ -23,23 +23,27 @@ public class PriceMap {
     }
 
     public void changeName(Integer code, String name) { //изменение имени по коду
-        if (!products.containsKey(code)) throw new IllegalArgumentException("Продукт с таким кодом отсутствует");
-        products.get(code).setName(name);
+        Product prod = products.get(code);
+        if (prod == null) throw new IllegalArgumentException("Продукт с таким кодом отсутствует");
+        else prod.setName(name);
     }
 
     public void changePrice(Integer code, Price price) { //изменение цены по коду
-        if (!products.containsKey(code)) throw new IllegalArgumentException("Продукт с таким кодом отсутствует");
-        products.get(code).setPrice(price);
+        Product prod = products.get(code);
+        if (prod == null) throw new IllegalArgumentException("Продукт с таким кодом отсутствует");
+        else prod.setPrice(price);
     }
 
     public Price purchase(Integer code, int number) {
-        if (!products.containsKey(code)) throw new IllegalArgumentException("Продукт с таким кодом отсутствует");
-        return new Price(products.get(code).getPrice().getPriceKopecks() * number);
+        Product prod = products.get(code);
+        if (prod == null) throw new IllegalArgumentException("Продукт с таким кодом отсутствует");
+        else return new Price(prod.getPrice().getPriceKopecks() * number);
     }
 
     public String getName(Integer code) {
-        if (!products.containsKey(code)) throw new IllegalArgumentException("Продукт с таким кодом отсутствует");
-        return products.get(code).getName();
+        Product prod = products.get(code);
+        if (prod == null) throw new IllegalArgumentException("Продукт с таким кодом отсутствует");
+        else return prod.getName();
     }
 
     public Product getProduct(Integer code) {
